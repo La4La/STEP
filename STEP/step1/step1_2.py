@@ -51,4 +51,4 @@ while True:
         f = find(score, len(score)-i)
         answer += f
     answer = sorted(answer, key=lambda x: x[1], reverse=True)
-    print(answer[0])
+    print(answer[:1])
