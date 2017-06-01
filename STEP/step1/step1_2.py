@@ -25,15 +25,17 @@ print('dict prepared')
 
 def find(l, n):
     candidate = list(itertools.combinations(l, n))
+    ans = []
     for i in range(len(candidate)):
-        if 'q' in candidate[i]:
-            candidate[i] += ('u',)
-        c = sorted(list(candidate[i]))
+        alphabets = [x[0] for x in candidate[i]]
+        score = [x[1] for x in candidate[i]]
+        if 'q' in alphabets:
+            alphabets += ('u',)
+        c = sorted(list(alphabets))
         c = ''.join(c)
         if c in dict:
-            print(dict[c])
-            return True
-    return False
+            ans.append((dict[c],sum(score)))
+    return ans
 
 # in dictionary or not
 while True:
@@ -43,9 +45,10 @@ while True:
     for i in range(len(input)):
         score.append((input[i], point[input[i]]))
     score = sorted(score, key=lambda x: x[1], reverse=True)
-    alphabets = [x[0] for x in score]
 
-    for i in range(len(alphabets)):
-        f = find(alphabets, len(alphabets)-i)
-        if f == True:
-            break
+    answer = []
+    for i in range(len(score)):
+        f = find(score, len(score)-i)
+        answer += f
+    answer = sorted(answer, key=lambda x: x[1], reverse=True)
+    print(answer[:10])
