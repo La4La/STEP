@@ -26,6 +26,8 @@ print('dict prepared')
 def find(l, n):
     candidate = list(itertools.combinations(l, n))
     for i in range(len(candidate)):
+        if 'q' in candidate[i]:
+            candidate[i] += ('u',)
         c = sorted(list(candidate[i]))
         c = ''.join(c)
         if c in dict:
@@ -36,7 +38,7 @@ def find(l, n):
 # in dictionary or not
 while True:
     input = list(raw_input('alphabets:'))
-    
+
     score = []
     for i in range(len(input)):
         score.append((input[i], point[input[i]]))
